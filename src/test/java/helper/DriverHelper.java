@@ -39,17 +39,16 @@ public class DriverHelper extends ExternalResource {
         driver = new ChromeDriver(service, options);
     }
 
-        public void setUpFirefox () {
-            System.setProperty("webdriver.http.factory", "jdk-http-client");
-            var service = new GeckoDriverService.Builder()
-                    .withLogOutput(System.out)
-                    .usingDriverExecutable(new File(WEB_DRIVER_FIREFOX))
-                    .build();
-            FirefoxOptions options = new FirefoxOptions()
-                    .setBinary(WEB_DRIVER_FIREFOX_BIN);
-
-            driver = new FirefoxDriver(service, options);
-        }
+    public void setUpFirefox() {
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+        var service = new GeckoDriverService.Builder()
+                .withLogOutput(System.out)
+                .usingDriverExecutable(new File(WEB_DRIVER_FIREFOX))
+                .build();
+        FirefoxOptions options = new FirefoxOptions()
+                .setBinary(WEB_DRIVER_FIREFOX_BIN);
+        driver = new FirefoxDriver(service, options);
+    }
 
     @Override
     protected void after() {
