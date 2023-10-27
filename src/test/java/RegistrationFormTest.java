@@ -25,11 +25,13 @@ public class RegistrationFormTest {
 
     @After
     public void deleteUser() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        RestAssured.baseURI = EnvConfig.BASE_URL;
         ValidatableResponse response = UserAction.authorizationUser(user);
+
         if (UserAssertion.isAuthorizated(response)) {
             accessToken = response.extract().path("accessToken");
         }
+
         if (!accessToken.isEmpty()) {
             ValidatableResponse deleteUser = UserAction.deleteCreatedUser(accessToken);
             UserAssertion.assertUserDelete(deleteUser);
@@ -42,14 +44,16 @@ public class RegistrationFormTest {
         user = UserGenerator.randomUser();
         WebDriver driver = driverHelper.getDriver();
         MainPage mainPage = new MainPage(driverHelper.getDriver());
-        AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver());
+        AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);
         RegistrationPage registrationPage = new RegistrationPage(driverHelper.getDriver(), user);
+
         driver.get(EnvConfig.BASE_URL);
         mainPage.clickAccountButton();
         authorizationPage.isLoginPageVisible();
         authorizationPage.clickRegistrationButton();
         registrationPage.register();
-        authorizationPage.isLoginPageVisible();
+
+        Assert.assertTrue(authorizationPage.isLoginPageVisible());
 
     }
 
@@ -59,13 +63,15 @@ public class RegistrationFormTest {
         user = UserGenerator.randomUserWithFiveSymbolPassword();
         WebDriver driver = driverHelper.getDriver();
         MainPage mainPage = new MainPage(driverHelper.getDriver());
-        AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver());
+        AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);
         RegistrationPage registrationPage = new RegistrationPage(driverHelper.getDriver(), user);
+
         driver.get(EnvConfig.BASE_URL);
         mainPage.clickAccountButton();
         authorizationPage.isLoginPageVisible();
         authorizationPage.clickRegistrationButton();
         registrationPage.register();
+
         Assert.assertTrue(registrationPage.isPasswordErrorVisible());
     }
 }

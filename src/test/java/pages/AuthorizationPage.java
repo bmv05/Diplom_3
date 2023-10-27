@@ -1,5 +1,6 @@
 package pages;
 
+import User.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class AuthorizationPage {
     private final WebDriver driver;
+    private final User user;
     private final static By LOGIN_PAGE_HEADER = By.xpath("//h2[text()='Вход']");
     private final By emailField = By.name("name");
     private final By passwordField = By.name("Пароль");
@@ -19,8 +21,9 @@ public class AuthorizationPage {
     final By registrationButton = By.xpath("//a[text()='Зарегистрироваться']");
 
 
-    public AuthorizationPage(WebDriver driver) {
+    public AuthorizationPage(WebDriver driver, User user) {
         this.driver = driver;
+        this.user = user;
     }
 
 
@@ -37,26 +40,26 @@ public class AuthorizationPage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
-    public void inputEmail(String email){
-        driver.findElement(emailField).sendKeys(email);
+    public void fillInputEmail(){
+        driver.findElement(emailField).sendKeys(user.getEmail());
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
-    public void inputPassword(String password){
+    public void fillInputPassword(){
         driver.findElement(passwordField).clear();
-        driver.findElement(passwordField).sendKeys(password);
+        driver.findElement(passwordField).sendKeys(user.getPassword());
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     public void clickEnterButton() {
         driver.findElement(enterButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
-    public void login(String email, String password) {
-        inputEmail(email);
-        inputPassword(password);
-        clickEnterButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+    public void login() {
+        this.fillInputEmail();
+        this.fillInputPassword();
+        this.clickEnterButton();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     public boolean isLoginPageVisible(){
