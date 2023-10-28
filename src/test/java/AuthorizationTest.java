@@ -13,9 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.WebDriver;
-import pages.AuthorizationPage;
-import pages.BurgerMainPage;
-import pages.MainPage;
+import pages.*;
 
 import static junit.framework.Assert.*;
 
@@ -45,8 +43,8 @@ public class AuthorizationTest {
     }
 
     @Test
-    @DisplayName("Проверка входа по кнопке «Войти в аккаунт» на главной")
-    public void authorizationFromHomePageTest() {
+    @DisplayName("Проверка входа через кнопку «Личный кабинет»")
+    public void authorizationFromAccountTest() {
         WebDriver driver = driverHelper.getDriver();
         MainPage mainPage = new MainPage(driverHelper.getDriver());
         AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);
@@ -55,6 +53,60 @@ public class AuthorizationTest {
         driver.get(EnvConfig.BASE_URL);
         mainPage.clickAccountButton();
         authorizationPage.isLoginPageVisible();
+        authorizationPage.login();
+
+        assertTrue("Страница 'Соберите бургер' не отобразилась", burgerMainPage.isBurgerPageVisible());
+    }
+
+    @Test
+    @DisplayName("Проверка входа по кнопке «Войти в аккаунт» на главной")
+    public void authorizationFromHomePageTest() {
+        WebDriver driver = driverHelper.getDriver();
+        AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);
+        BurgerMainPage burgerMainPage = new BurgerMainPage(driverHelper.getDriver());
+
+        driver.get(EnvConfig.BASE_URL);
+        burgerMainPage.enterAccountFromMain();
+        authorizationPage.isLoginPageVisible();
+        authorizationPage.login();
+
+        assertTrue("Страница 'Соберите бургер' не отобразилась", burgerMainPage.isBurgerPageVisible());
+    }
+
+    @Test
+    @DisplayName("Проверка входа через кнопку в форме регистрации")
+    public void authorizationFromFormRegistrationTest() {
+        WebDriver driver = driverHelper.getDriver();
+        MainPage mainPage = new MainPage(driverHelper.getDriver());
+        AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);
+        RegistrationPage registrationPage = new RegistrationPage(driverHelper.getDriver(), user);
+        BurgerMainPage burgerMainPage = new BurgerMainPage(driverHelper.getDriver());
+
+        driver.get(EnvConfig.BASE_URL);
+        mainPage.clickAccountButton();
+        authorizationPage.isLoginPageVisible();
+        authorizationPage.clickRegistrationButton();
+        registrationPage.clickEnterButton();
+        authorizationPage.isLoginPageVisible();
+        authorizationPage.login();
+
+        assertTrue("Страница 'Соберите бургер' не отобразилась", burgerMainPage.isBurgerPageVisible());
+    }
+    @Test
+    @DisplayName("Проверка входа через кнопку в форме восстановления пароля")
+    public void authorizationFromFormRecoveryTest() {
+        WebDriver driver = driverHelper.getDriver();
+        MainPage mainPage = new MainPage(driverHelper.getDriver());
+        AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);
+        BurgerMainPage burgerMainPage = new BurgerMainPage(driverHelper.getDriver());
+        PasswordRecoveryPage passwordRecoveryPage = new PasswordRecoveryPage(driverHelper.getDriver());
+
+        driver.get(EnvConfig.BASE_URL);
+        mainPage.clickAccountButton();
+        authorizationPage.isLoginPageVisible();
+        authorizationPage.clickResetButton();
+        passwordRecoveryPage.isResetPasswordPageVisible();
+        passwordRecoveryPage.clickEnterButton();
         authorizationPage.login();
 
         assertTrue("Страница 'Соберите бургер' не отобразилась", burgerMainPage.isBurgerPageVisible());
