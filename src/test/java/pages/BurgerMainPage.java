@@ -30,19 +30,16 @@ public class BurgerMainPage {
         return ((List<?>) makeBurger).size() == 1;
     }
 
-    public BurgerMainPage selectBuns() {
+    public void selectBuns() {
         driver.findElement(bunsButton).click();
-        return this;
     }
 
-    public BurgerMainPage selectSauces() {
+    public void selectSauces() {
         driver.findElement(saucesButton).click();
-        return this;
     }
 
-    public BurgerMainPage selectFillings() {
+    public void selectFillings() {
         driver.findElement(fillingsButton).click();
-        return this;
     }
 
     public String getElementInFocus() {
