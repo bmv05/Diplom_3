@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
+import io.qameta.allure.junit4.DisplayName;
 import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import pages.AuthorizationPage;
@@ -28,7 +28,7 @@ public class RegistrationFormTest {
         RestAssured.baseURI = EnvConfig.BASE_URL;
         ValidatableResponse response = UserAction.authorizationUser(user);
 
-        if (UserAssertion.isAuthorizated(response)) {
+        if (UserAssertion.isAuthorized(response)) {
             accessToken = response.extract().path("accessToken");
         }
 

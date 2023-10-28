@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
+import io.qameta.allure.junit4.DisplayName;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
@@ -27,7 +27,7 @@ public class AuthorizationTest {
     public void createUser() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
         ValidatableResponse response = UserAction.createNewUser(user);
-        if (UserAssertion.isAuthorizated(response)) {
+        if (UserAssertion.isAuthorized(response)) {
             accessToken = response.extract().path("accessToken");
         }
     }

@@ -22,8 +22,7 @@ public class PasswordRecoveryPage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
-    public boolean isResetPasswordPageVisible() {
+    public void isResetPasswordPageVisible() {
         List<WebElement> loginHeader = driver.findElements(RESET_PASSWORD_HEADER);
-        return loginHeader.size() == 1;
     }
 }

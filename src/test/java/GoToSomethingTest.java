@@ -7,7 +7,7 @@ import helper.EnvConfig;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.*;
-import org.junit.jupiter.api.DisplayName;
+import io.qameta.allure.junit4.DisplayName;
 import org.openqa.selenium.WebDriver;
 import pages.AuthorizationPage;
 import pages.BurgerMainPage;
@@ -26,7 +26,7 @@ public class GoToSomethingTest {
     public void createUser() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
         ValidatableResponse response = UserAction.createNewUser(user);
-        if (UserAssertion.isAuthorizated(response)) {
+        if (UserAssertion.isAuthorized(response)) {
             accessToken = response.extract().path("accessToken");
         }
     }

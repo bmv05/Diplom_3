@@ -43,7 +43,6 @@ public class BurgerMainPage {
     }
 
     public String getElementInFocus() {
-        String focusedElementText = driver.findElement(focusedConstructorPart).getText();
-        return focusedElementText;
+        return driver.findElement(focusedConstructorPart).getText();
     }
 }
