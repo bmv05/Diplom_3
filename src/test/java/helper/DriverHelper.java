@@ -22,6 +22,8 @@ public class DriverHelper extends ExternalResource {
     protected void before() {
         if ("firefox".equals(System.getProperty("browser")))
             setUpFirefox();
+        else if ("yandex".equals(System.getProperty("browser")))
+            setUpYandex();
         else
             setUpChrome();
 
@@ -39,7 +41,7 @@ public class DriverHelper extends ExternalResource {
         driver = new ChromeDriver(service, options);
     }
 
-    public void setUpFirefox() {
+    public void setUpFirefox() { //-ea -Dbrowser=firefox
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         var service = new GeckoDriverService.Builder()
                 .withLogOutput(System.out)
@@ -48,6 +50,16 @@ public class DriverHelper extends ExternalResource {
         FirefoxOptions options = new FirefoxOptions()
                 .setBinary(WEB_DRIVER_FIREFOX_BIN);
         driver = new FirefoxDriver(service, options);
+    }
+    public void setUpYandex() { //-ea -Dbrowser=yandex
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+        ChromeDriverService service = new ChromeDriverService.Builder()
+                .withLogOutput(System.out)
+                .usingDriverExecutable(new File(WEB_DRIVER_YANDEX))
+                .build();
+        ChromeOptions options = new ChromeOptions()
+                .setBinary(WEB_DRIVER_YANDEX_BIN);
+        driver = new ChromeDriver(service, options);
     }
 
     @Override
