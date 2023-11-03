@@ -1,20 +1,22 @@
 package User;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomUtils;
 
 public class UserGenerator {
-    public static User randomUser() {
+    Faker faker = new Faker();
+
+    public static User randomUser(Faker faker) {
         return new User(
-                RandomStringUtils.randomAlphabetic(5, 10).toLowerCase() + "@stellar.ru",
-                "Pas" + RandomUtils.nextInt(1000, 10000),
-                RandomStringUtils.randomAlphabetic(5, 15));
+                faker.internet().emailAddress(),
+                faker.internet().password(),
+                faker.name().name());
     }
 
-    public static User randomUserWithFiveSymbolPassword() {
+    public static User randomUserWithFiveSymbolPassword(Faker faker) {
         return new User(
-                RandomStringUtils.randomAlphabetic(5, 10).toLowerCase() + "@stellar.ru",
+                faker.internet().emailAddress(),
                 "Pas" + RandomUtils.nextInt(10, 99),
-                RandomStringUtils.randomAlphabetic(5, 15));
+                faker.name().name());
     }
 }

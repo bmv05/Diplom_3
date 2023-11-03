@@ -13,6 +13,17 @@
 6. Раздел «Конструктор»
 7. Сделан Allure-отчёт
 
+
+Перед запуском тестов надо указать расположение драйверов для каждого браузера в configuration template:
+WEB_DRIVER_CHROME_BIN - путь до браузера
+WEB_DRIVER_CHROME - путь до драйвера
+WEB_DRIVER_YANDEX_BIN - путь до браузера
+WEB_DRIVER_YANDEX - путь до драйвера
+WEB_DRIVER_FIREFOX_BIN - путь до браузера
+WEB_DRIVER_FIREFOX - путь до драйвера
+
+Версия драйвера должна соответствовать версии браузера Google Chrome
+
 Тесты можно запускать в следующих браузерах:
 1. Chrome, не указывая дополнительные настройки
 2. Yandex, указав -ea -Dbrowser=yandex

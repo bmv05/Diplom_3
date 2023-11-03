@@ -2,6 +2,7 @@ import User.User;
 import User.UserAction;
 import User.UserAssertion;
 import User.UserGenerator;
+import com.github.javafaker.Faker;
 import helper.DriverHelper;
 import helper.EnvConfig;
 import io.restassured.RestAssured;
@@ -20,6 +21,7 @@ public class RegistrationFormTest {
     @Rule
     public DriverHelper driverHelper = new DriverHelper();
     private String accessToken = "";
+    Faker faker = new Faker();
     User user;
 
 
@@ -41,7 +43,7 @@ public class RegistrationFormTest {
     @Test
     @DisplayName("Проверка успешной регистрации")
     public void successfulRegistrationTest() {
-        user = UserGenerator.randomUser();
+        user = UserGenerator.randomUser(faker);
         WebDriver driver = driverHelper.getDriver();
         MainPage mainPage = new MainPage(driverHelper.getDriver());
         AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);
@@ -60,7 +62,7 @@ public class RegistrationFormTest {
     @Test
     @DisplayName("Проверка ошибки регистрации. Пароль меньше 6 символов")
     public void failRegistrationTest() {
-        user = UserGenerator.randomUserWithFiveSymbolPassword();
+        user = UserGenerator.randomUserWithFiveSymbolPassword(faker);
         WebDriver driver = driverHelper.getDriver();
         MainPage mainPage = new MainPage(driverHelper.getDriver());
         AuthorizationPage authorizationPage = new AuthorizationPage(driverHelper.getDriver(), user);

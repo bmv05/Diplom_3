@@ -27,7 +27,7 @@ public class DriverHelper extends ExternalResource {
         else
             setUpChrome();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     private void setUpChrome() {

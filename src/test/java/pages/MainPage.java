@@ -29,7 +29,7 @@ public class MainPage {
     public void clickAccountButton() {
         driver.findElement(accountButton).isEnabled();
         driver.findElement(accountButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 }
 

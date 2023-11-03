@@ -53,13 +53,13 @@ public class RegistrationPage {
     public void clickRegisterButton(){
         driver.findElement(registerButton).isEnabled();
         driver.findElement(registerButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
 
     public void clickEnterButton() {
         driver.findElement(enterButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     public Boolean isPasswordErrorVisible(){

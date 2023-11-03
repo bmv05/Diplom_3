@@ -31,23 +31,23 @@ public class AuthorizationPage {
     public void clickRegistrationButton() {
         driver.findElement(registrationButton).isEnabled();
         driver.findElement(registrationButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     public void clickResetButton() {
         driver.findElement(resetButton).isEnabled();
         driver.findElement(resetButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     public void fillInputEmail(){
         driver.findElement(emailField).sendKeys(user.getEmail());
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
     public void fillInputPassword(){
         driver.findElement(passwordField).clear();
         driver.findElement(passwordField).sendKeys(user.getPassword());
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     public void clickEnterButton() {

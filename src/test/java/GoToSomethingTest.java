@@ -2,6 +2,7 @@ import User.User;
 import User.UserAction;
 import User.UserGenerator;
 import User.UserAssertion;
+import com.github.javafaker.Faker;
 import helper.DriverHelper;
 import helper.EnvConfig;
 import io.restassured.RestAssured;
@@ -19,7 +20,9 @@ public class GoToSomethingTest {
     @Rule
     public DriverHelper driverHelper = new DriverHelper();
     private String accessToken = "";
-    User user = UserGenerator.randomUser();
+    Faker faker = new Faker();
+    User user = UserGenerator.randomUser(faker);
+
 
 
     @Before

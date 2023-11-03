@@ -23,6 +23,6 @@ public class ProfilePage {
 
     public void clickLogoutButton() {
         driver.findElement(logoutButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 }
